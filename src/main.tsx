@@ -11,11 +11,17 @@ import ErrorPage from "./error-page"
 
 //Routes
 import Homepage from './routes/Homepage.jsx';
+import Login from './routes/Login.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Homepage />,
+    errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
+  },
+  {
+    path: "/login",
+    element: <Login />,
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
 ]);
