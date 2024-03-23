@@ -2,13 +2,14 @@ import React from 'react'
 import Header from '../components/Header'
 import Git from "../assets/github-mark.png"
 import Photo from "../assets/frontPagePhoto.jpg"
+import { Link } from 'react-router-dom'
 
 const Homepage = () => {
   return (
     <>
       <Header/>
       <div className='md:m-4 shadow-lg m-1 rounded-3xl overflow-hidden '>
-        <img src={Photo} alt="Moving Photo" className=' border-hidden'/>
+        <img src={Photo} alt="Moving Photo" className=' border-hidden w-full'/>
       </div>
       <body>
       <div className=' flex m-5 p-4'>
@@ -48,7 +49,7 @@ const Homepage = () => {
             <div className=' bg-[#A15A2A] h-[300px] w-[200px] flex justify-center' >
               <div className=' flex flex-col space-y-6 m-6'>
               <a href='/' className='font-semibold'>Contact</a>
-              <a href='/' className='font-semibold'>Location</a>
+              <Link to='/' className='font-semibold'>Location</Link>
               <img src={Git} alt="" className='w-8'/>
               <small>
                 Copyright © 2023 Haruki History Archives. All Rights Reserved.
