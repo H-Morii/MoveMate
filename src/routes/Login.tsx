@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Button from '../components/ui/Button'
+import BasicButton from '../components/ui/BasicButton'
 import BasicTextFields from '../components/ui/BasicTextFields';
 
 interface authForm {
@@ -8,9 +8,7 @@ interface authForm {
   confirmPassword:string
 }
 
-const Login = () => {
-
-
+const Login:React.FC = () => {
 
   const [input, setInput] = useState<authForm>({
     email:'',
@@ -18,19 +16,32 @@ const Login = () => {
     confirmPassword:''
   })
 
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    const { name, value } = e.target;
+    setInput((prevCredentials) => ({
+      ...prevCredentials,
+      [name]: value,
+    }));
+  };
+
+
+  const handleAuth = () => {
+    console.log("userInfo",input);
+  }
+
 
   return (
     <>
       <div className=' bg-slate-900 h-[100vh] flex justify-center items-center flex-col '>
               <h1 className=' text-2xl text-white'>Login</h1>
-        <div className='p-10 w-[400px] h-[300px] m-5 md:w-[500px] bg-white border-2 flex justify-center rounded-xl'>
-            <div className='tex-white'>
-              <BasicTextFields label="Username" variant="outlined" width={"35ch"} value={input.email} onChange={(e:React.ChangeEvent<HTMLInputElement>) => setInput({...input, email:e.target.value})}/>
-              <BasicTextFields label="Password" variant="outlined" width={"35ch"} value={input.password} onChange={(e:React.ChangeEvent<HTMLInputElement>) => setInput({...input,password:e.target.value})}/>
-              <div className='px-2'>
-              <Button variant={"contained"} text={"Login"} color={"primary"} />
+        <div className='p-10 w-[400px] h-[300px] m-5 md:w-[500px] bg-[#1C1F33]  flex justify-center rounded-xl'>
+            <div className=' flex justify-center flex-col'>
+              <input value={input.email} type='text' name='email' onChange={handleChange} placeholder='Email' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2'/>
+              <input value={input.password} type='password' name='password' onChange={handleChange} placeholder='password' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2'/>
+              <div className='p-2 '>
+              <button onClick={handleAuth} name={'button'} className=' bg-indigo-500 py-2 p-4 rounded-md'>Login</button>
               </div>
-              <a href='/register' className='px-2 text-[12px] hover:underline '>Dont have an account? Register here!</a>
+              <a href='/register' className='p-2 text-[12px] hover:underline '>Dont have an account? Register here!</a>
             </div>
         </div>
 

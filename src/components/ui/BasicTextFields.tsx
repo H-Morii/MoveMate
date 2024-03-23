@@ -13,6 +13,7 @@ interface InputProps {
   width: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name:string
 }
 const theme = createTheme({
     palette: {
@@ -21,7 +22,7 @@ const theme = createTheme({
     },
 });
 
-const BasicTextFields:React.FC<InputProps> = ({label , variant, width}) =>  {
+const BasicTextFields:React.FC<InputProps> = ({label , variant, width, value, name, onChange}) =>  {
   return (
     <ThemeProvider theme={theme}>
     <Box
@@ -34,7 +35,7 @@ const BasicTextFields:React.FC<InputProps> = ({label , variant, width}) =>  {
       borderRadius={"6px"}
       borderColor="indigo"
     >
-      <TextField id="outlined-basic" label={label} variant={variant} sx={{width: width}} />
+      <TextField id="outlined-basic" label={label} variant={variant} sx={{width: width}} value={value} name={name} onChange={onChange}/>
     </Box>
     </ThemeProvider>
   );

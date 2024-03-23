@@ -7,6 +7,8 @@ interface BasicButtonsProps {
   text: string;
   variant: 'text' | 'outlined' | 'contained';
   color: 'primary' | 'secondary' | 'inherit' | 'success' | 'error' | 'info' | 'warning';
+  onClick: React.MouseEventHandler<HTMLButtonElement>
+  name:string
 }
 
 
@@ -23,7 +25,7 @@ const theme = createTheme({
 });
 
 
-const BasicButtons:React.FC<BasicButtonsProps> = ({text, variant, color}) => {
+const BasicButtons: React.FC<BasicButtonsProps> = ({text, variant, color}) => {
   return (
     <ThemeProvider theme={theme}>
     <Stack spacing={2} direction="row">

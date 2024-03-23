@@ -1,5 +1,4 @@
-import React from 'react';
-import Button from '@mui/material/Button';
+
 import { Link } from 'react-router-dom';
 import '../index.css'
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -8,7 +7,7 @@ export default function Header() {
   return (
     <>
           <div className=' bg-black shadow-2xl rounded-2xl m-1 md:m-4'>
-            <hearder className='text-white '>
+            <header className='text-white '>
               <nav className=' container mx-auto px-6 py-3 flex justify-between items-center'>
                 <div>
                 <Link to="/" className='flex items-center'>
@@ -31,7 +30,7 @@ export default function Header() {
                 </button>
                 </div>
               </nav>
-              </hearder>
+              </header>
           </div>
     </>
   );
