@@ -3,17 +3,17 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 //color
-import { createTheme,ThemeProvider, alpha, getContrastRatio } from '@mui/material/styles';
+import { createTheme,ThemeProvider} from '@mui/material/styles';
 import { indigo, lightBlue } from '@mui/material/colors';
 
 
-// interface PalleteColor {
-//   light:string;
-//   main:string,
-//   dark:string,
-//   contrastText:string
-// }
-
+interface InputProps {
+  label: string;
+  variant: 'outlined' | 'filled' | 'standard';
+  width: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
 const theme = createTheme({
     palette: {
       primary: indigo,
@@ -21,7 +21,7 @@ const theme = createTheme({
     },
 });
 
-export default function BasicTextFields({label , variant, width}) {
+const BasicTextFields:React.FC<InputProps> = ({label , variant, width}) =>  {
   return (
     <ThemeProvider theme={theme}>
     <Box
@@ -39,3 +39,5 @@ export default function BasicTextFields({label , variant, width}) {
     </ThemeProvider>
   );
 }
+
+export default BasicTextFields

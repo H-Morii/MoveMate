@@ -1,8 +1,13 @@
-import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { createTheme,ThemeProvider} from '@mui/material/styles';
 import { indigo, lightBlue } from '@mui/material/colors';
+
+interface BasicButtonsProps {
+  text: string;
+  variant: 'text' | 'outlined' | 'contained';
+  color: 'primary' | 'secondary' | 'inherit' | 'success' | 'error' | 'info' | 'warning';
+}
 
 
 const theme = createTheme({
@@ -18,7 +23,7 @@ const theme = createTheme({
 });
 
 
-export default function BasicButtons({text, variant, color}) {
+const BasicButtons:React.FC<BasicButtonsProps> = ({text, variant, color}) => {
   return (
     <ThemeProvider theme={theme}>
     <Stack spacing={2} direction="row">
@@ -27,3 +32,5 @@ export default function BasicButtons({text, variant, color}) {
     </ThemeProvider>
   );
 }
+
+export default BasicButtons
