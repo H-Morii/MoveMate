@@ -31,7 +31,7 @@ export default function BasicTextFields({label , variant, width}) {
       }}
       noValidate
       autoComplete="on"
-      borderRadius={2}
+      borderRadius={"6px"}
       borderColor="indigo"
     >
       <TextField id="outlined-basic" label={label} variant={variant} sx={{width: width}} />
