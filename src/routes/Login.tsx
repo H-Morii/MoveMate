@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import BasicButton from '../components/ui/BasicButton'
-import BasicTextFields from '../components/ui/BasicTextFields';
+import { useNavigate } from 'react-router-dom';
 
 interface authForm {
   email: string
@@ -24,9 +23,15 @@ const Login:React.FC = () => {
     }));
   };
 
+  const navigate = useNavigate()
+
 
   const handleAuth = () => {
-    console.log("userInfo",input);
+    if( !input.email || !input.password) {
+    alert("Please Fill all the fields");
+    return
+    }
+    navigate("/");
   }
 
 
@@ -36,8 +41,8 @@ const Login:React.FC = () => {
               <h1 className=' text-2xl text-white'>Login</h1>
         <div className='p-10 w-[400px] h-[300px] m-5 md:w-[500px] bg-[#1C1F33]  flex justify-center rounded-xl'>
             <div className=' flex justify-center flex-col'>
-              <input value={input.email} type='text' name='email' onChange={handleChange} placeholder='Email' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2'/>
-              <input value={input.password} type='password' name='password' onChange={handleChange} placeholder='password' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2'/>
+              <input value={input.email} type='text' name='email' onChange={handleChange} placeholder='Email' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2 placeholder-black placeholder:opacity-65'/>
+              <input value={input.password} type='password' name='password' onChange={handleChange} placeholder='password' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2 placeholder-black placeholder:opacity-65'/>
               <div className='p-2 '>
               <button onClick={handleAuth} name={'button'} className=' bg-indigo-500 py-2 p-4 rounded-md'>Login</button>
               </div>
