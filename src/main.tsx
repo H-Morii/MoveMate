@@ -14,6 +14,8 @@ import Homepage from './routes/Homepage.jsx';
 import Login from './routes/Login.jsx';
 import PageLayout from './Layouts/PageLayout/PageLayout.js';
 import UserPage from './routes/UserPage/UserPage.js';
+import WelcomeContent from './components/WelcomeContent/WelcomeContent.js';
+import Map from './components/Map/Map.js';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
     element: (
     <PageLayout>
       <UserPage/>
+      <WelcomeContent/>
     </PageLayout>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
@@ -28,19 +31,15 @@ const router = createBrowserRouter([
   {
     path: "/homepage",
     element: (
-    <PageLayout>
       <Homepage />
-    </PageLayout>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
   {
     path: "/login",
     element: (
-    <PageLayout>
     <Login />
-    </PageLayout>)
-    ,
+    ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
 ]);
