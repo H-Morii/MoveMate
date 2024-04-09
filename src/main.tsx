@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,16 +13,14 @@ import './index.css'
 import Homepage from './routes/Homepage.jsx';
 import Login from './routes/Login.jsx';
 import PageLayout from './Layouts/PageLayout/PageLayout.js';
-import UserPage from './routes/UserPage/UserPage.js';
 import WelcomeContent from './components/WelcomeContent/WelcomeContent.js';
-import Map from './components/Map/Map.js';
+import Profile from './components/Profile/Profile.js';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
     <PageLayout>
-      <UserPage/>
       <WelcomeContent/>
     </PageLayout>
     ),
@@ -31,7 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/homepage",
     element: (
+      <PageLayout>
       <Homepage />
+      </PageLayout>
+
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
@@ -39,6 +40,15 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
     <Login />
+    ),
+    errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
+  },
+  {
+    path: ":user",
+    element: (
+    <PageLayout>
+      <Profile/>
+    </PageLayout>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },

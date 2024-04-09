@@ -1,5 +1,4 @@
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import { APIProvider, Map ,AdvancedMarker, Pin, InfoWindow } from '@vis.gl/react-google-maps';
 
 const mapContainerStyle = {
   width: '100vw',

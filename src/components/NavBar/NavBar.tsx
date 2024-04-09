@@ -29,21 +29,19 @@ const NavBar:React.FC = () => {
     <>
     {/* Phone Navbar */}
     { isSmallScreen ? (
-    <nav className="fixed inset-x-0 bottom-0 bg-black h-[4rem] rounded-3xl m-5 opacity-80 ">
+    <nav className="fixed inset-x-0 bottom-0 bg-black h-[4rem] rounded-3xl m-5 opacity-80 z-10">
       <div className=" w-full h-full flex justify-center items-center space-x-10">
-        <div className="" >
-        <GoHome size="2em" color="white"/>
-        </div>
-        <div className=" hover:cursor-pointer"><BiMapPin size="2em" color="white"/></div>
-        <div className=" hover:cursor-pointer"><CgSearch size="2em" color="white"/></div>
-        <div className=" hover:cursor-pointer"><BsChat size="2em" color="white"/></div>
-        <div className=" hover:cursor-pointer"><CgProfile size="2em" color="white"/></div>
+        <Link to="/" className=" hover:cursor-pointer"><GoHome size="2em" color="white"/></Link>
+        <Link to="/" className=" hover:cursor-pointer"><BiMapPin size="2em" color="white"/></Link>
+        <Link to="/" className=" hover:cursor-pointer"><CgSearch size="2em" color="white"/></Link>
+        <Link to="/" className=" hover:cursor-pointer"><BsChat size="2em" color="white"/></Link>
+        <Link to="/" className=" hover:cursor-pointer"><CgProfile size="2em" color="white"/></Link>
       </div>
       </nav> )
       :
       // Webpage Navbar
       (
-        <div className=' bg-black shadow-2xl rounded-2xl '>
+        <div className=' bg-black shadow-2xl '>
         <header className='text-white '>
           <nav className=' container mx-auto px-6 py-3 flex justify-between items-center'>
             <div>

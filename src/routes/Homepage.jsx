@@ -8,10 +8,10 @@ const Homepage = () => {
   return (
     <>
       <Header/>
-      <div className='md:m-4 shadow-lg m-1 rounded-3xl overflow-hidden '>
+      <figure className='md:m-4 shadow-lg m-1 rounded-3xl overflow-hidden '>
         <img src={Photo} alt="Moving Photo" className=' border-hidden w-full'/>
-      </div>
-      <body>
+      </figure>
+      <div>
       <div className=' flex m-5 p-4'>
         <div className=' container mx-auto'>
           <h2 className='text-2xl font-bold md:text-3xl p-5'>Send Items Efficient, Reliable, Simple</h2>
@@ -43,6 +43,7 @@ const Homepage = () => {
         </div>
         </div>
       </div>
+      </div>
       <footer>
         <div className='h-[300px] bg-black'>
           <div className=' pl-10 md:pl-32'>
@@ -59,7 +60,6 @@ const Homepage = () => {
             </div>
         </div>
       </footer>
-      </body>
      
     </>
   )
