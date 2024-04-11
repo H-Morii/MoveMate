@@ -53,7 +53,7 @@ const NavBar:React.FC = () => {
             <Link to="/" className=' hover:underline'>Home</Link>
             <Link to="/" className=' hover:underline'>Find</Link>
             <Link to="/" className=' hover:underline'>Search</Link>
-            <Link to="/" className=' hover:underline'>Profile</Link>
+            <Link to="user" className=' hover:underline'>Profile</Link>
             </div>
             <div className='md:flex space-x-4'>
               <Link to='/homepage' className='hover:underline'>Logout</Link>
