@@ -124,7 +124,7 @@ const Profile = () => {
       </div>
       </div>
       </div>
-      <div className="h-[100px] md:hidden">
+        <div className="h-[100px] md:hidden">
       </div>
     </>
   )

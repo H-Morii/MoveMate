@@ -15,6 +15,7 @@ import Login from './routes/Login.jsx';
 import PageLayout from './Layouts/PageLayout/PageLayout.js';
 import WelcomeContent from './components/WelcomeContent/WelcomeContent.js';
 import Profile from './components/Profile/Profile.js';
+import Register from './routes/Register.jsx';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,13 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
     <Login />
+    ),
+    errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
+  },
+  {
+    path: "/register",
+    element: (
+    <Register />
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
