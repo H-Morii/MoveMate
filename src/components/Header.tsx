@@ -22,7 +22,7 @@ export default function Header() {
                 </div>
                 <div className='hidden md:flex space-x-4'>
                   <Link to='/login' className='hover:underline'>Login</Link>
-                  <Link to='/' className='hover:underline'>Register</Link>
+                  <Link to='/register' className='hover:underline'>Register</Link>
                 </div>
                 <div className='md:hidden flex justify-center' >
                 <button type='button'>

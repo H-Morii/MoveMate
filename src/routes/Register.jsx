@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Select from "react-select";
 import Radiogroup from 'react-radio-buttons'
 import RadioButton from 'react-radio-buttons'
+import { Link } from 'react-router-dom';  
 
 const Register = () => {
   //User or Driver register
@@ -123,8 +124,7 @@ const Register = () => {
           </div>
           </div>
           </div>
-
-           {type === "Driver" ? <div className=''>
+            {type === "Driver" ? <div className=''>
             <h2 className='text-xl my-[2rem]'>Driver Information</h2>
             <div className='mb-2'>
             <h3 className='mb-2 font-semibold'>Driver license number</h3>
@@ -135,7 +135,10 @@ const Register = () => {
             <input type="text" className=' border p-3 w-full rounded-xl' />
             </div>
             </div> : null}
-
+            <div className='flex justify-center my-8 space-x-4'>
+              <Link to="/homepage" className='flex items-center'> Back</Link>
+              <button className=' px-7 py-4 rounded-[25px] text-[#424242] shadow-whiteShadow active:shadow-hoverWhiteShadow'>Register</button>
+            </div>
           </div>
         </form>}
       </div>
