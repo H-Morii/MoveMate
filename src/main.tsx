@@ -4,16 +4,19 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import App from './App.tsx'
 import './index.css'
-import Root from './routes/root';
+
+//ErrorPage
 import ErrorPage from "./error-page"
+
+//Routes
+import Homepage from './routes/Homepage.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage/>
+    element: <Homepage />,
+    errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
 ]);
 
