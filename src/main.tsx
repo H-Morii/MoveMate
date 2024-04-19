@@ -15,7 +15,7 @@ import Login from './routes/Login.jsx';
 import PageLayout from './Layouts/PageLayout/PageLayout.js';
 import WelcomeContent from './components/WelcomeContent/WelcomeContent.js';
 import Profile from './components/Profile/Profile.js';
-import Register from './routes/Register.jsx';
+import Register from './routes/Register.tsx';
 
 const router = createBrowserRouter([
   {
