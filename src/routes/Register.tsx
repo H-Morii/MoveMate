@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Select from "react-select";
 import { Link } from 'react-router-dom';
-import axios, { all } from'axios'
+import axios from'axios'
 
 interface OptionType {
   value: string;
@@ -86,15 +86,15 @@ const Register = () => {
         return
       }
 
-      //Password validation checker
-      // const pwdRegex =/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-      // if(registrationData.passwordHash !== tempPass) {
-      //   setPassErrorMessage(!passErrorMessage)
-      //   alert("Password did not match")
-      //   return
-      // } else if (!pwdRegex.test(registrationData.passwordHash)){
-      //   alert("Please enter a valid password")
-      // }
+      // Password validation checker
+      const pwdRegex =/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      if(registrationData.passwordHash !== tempPass) {
+        setPassErrorMessage(!passErrorMessage)
+        alert("Password did not match")
+        return
+      } else if (!pwdRegex.test(registrationData.passwordHash)){
+        alert("Please enter a valid password")
+      }
 
 
 
@@ -136,7 +136,6 @@ const Register = () => {
     }));
   };
 
-  console.log(registrationData)
 
   useEffect(() => {
     fetch(
