@@ -11,9 +11,9 @@ import './index.css'
 
 //Routes
 import Homepage from './routes/Homepage.jsx';
-import Login from './routes/Login.jsx';
+import Login from './routes/Login.tsx';
 import PageLayout from './Layouts/PageLayout/PageLayout.js';
-import WelcomeContent from './components/WelcomeContent/WelcomeContent.js';
+import WelcomeContent from './components/WelcomeContent/WelcomeContent.jsx';
 import Profile from './components/Profile/Profile.js';
 import Register from './routes/Register.tsx';
 

@@ -193,7 +193,7 @@ const Register = () => {
 
           <div className='mb-2'>
             <h3 className='mb-2 font-semibold'>Phone number</h3>
-            <input type="text" name='phoneNumber' value={registrationData.phoneNumber} onChange={handleInputChange}  className=' border p-3 w-full rounded-xl' />
+            <input type="text" name='phoneNumber' maxLength={11} value={registrationData.phoneNumber} onChange={handleInputChange}  className=' border p-3 w-full rounded-xl' />
           </div>
           <div className='flex'>
           <div className='mb-2'>
