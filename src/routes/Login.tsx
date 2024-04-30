@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface authForm {
   email: string
-  password:string;
+  passwordHash:string;
 }
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
@@ -13,12 +13,12 @@ const Login:React.FC = () => {
 
   const [authInput, setAuthInput] = useState<authForm>({
     email:'',
-    password:''
+    passwordHash:''
   })
   const navigate = useNavigate()
 
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     setAuthInput((prevCredentials) => ({
       ...prevCredentials,
@@ -30,7 +30,7 @@ const Login:React.FC = () => {
 
   const handleAuthSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if( !authInput.email || !authInput.password) {
+    if( !authInput.email || !authInput.passwordHash) {
     alert("Please Fill all the fields");
     return
     }
@@ -57,7 +57,7 @@ const Login:React.FC = () => {
         <div className='p-10 w-[400px] h-[300px] m-5 md:w-[500px] bg-[#1C1F33]  flex justify-center rounded-xl'>
             <div className=' flex justify-center flex-col'>
               <input value={authInput.email} required type='text' name='email' onChange={handleChange} placeholder='Email' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2 placeholder-black placeholder:opacity-65'/>
-              <input value={authInput.password} required type='password' name='password' onChange={handleChange} placeholder='password' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2 placeholder-black placeholder:opacity-65'/>
+              <input value={authInput.passwordHash} required type='password' name='passwordHash' onChange={handleChange} placeholder='password' className=' bg-slate-400 w-[17rem] rounded-md p-2 m-2 placeholder-black placeholder:opacity-65'/>
               <div className='p-2 '>
               <button onClick={handleAuthSubmit} name={'button'} className=' bg-indigo-500 py-2 p-4 rounded-md'>Login</button>
               </div>

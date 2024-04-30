@@ -52,7 +52,7 @@ const router = createBrowserRouter([
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
   {
-    path: ":user",
+    path: "/:user",
     element: (
     <PageLayout>
       <Profile/>
