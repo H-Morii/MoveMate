@@ -26,7 +26,8 @@ const useSignUpWithEmailAndPassword = () => {
                 return;
             }
             if (newUser) {
-                console.log(newUser);
+                console.log("newUser: ", newUser);
+                console.log("registrationData: ", regitrationData);
                 console.log("creating account");
                 const userDoc = {
                     uid: newUser.user.uid,
@@ -40,8 +41,13 @@ const useSignUpWithEmailAndPassword = () => {
                     posts: [],
                     createdAt: Date.now(),
                 };
-                await setDoc(doc(firestore, "user", newUser.user.uid), userDoc);
+                console.log("passed UserDoc");
+                await setDoc(
+                    doc(firestore, "users", newUser.user.uid),
+                    userDoc
+                );
                 localStorage.setItem("user-info", JSON.stringify(userDoc));
+
                 // loginUser(userDoc);
             }
             console.log("account has been created");
