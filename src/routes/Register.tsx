@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import Select from "react-select";
 import { Link } from 'react-router-dom';
-import axios from'axios'
+// import axios from'axios'
+//chakra
+import { Alert, AlertIcon, Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+
+import useSignUpWithEmailAndPassword from '../components/hooks/useSignUpWithEmailAndPassword';
 
 interface OptionType {
   value: string;
@@ -10,7 +14,7 @@ interface OptionType {
 
 interface RegisterType {
   email: string;
-  passwordHash: string;
+  password: string;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -32,7 +36,7 @@ interface RegisterType {
 // }
 
 
-const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
+// const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 const Register = () => {
   //User or Driver register
@@ -55,7 +59,7 @@ const Register = () => {
   //Registration useState
   const [registrationData, setRegistrationData] = useState<RegisterType>({
   email: '',
-  passwordHash: '',
+  password: '',
   firstName: '',
   middleName: '',
   lastName: '',
@@ -72,49 +76,49 @@ const Register = () => {
   company: '',
   })
 
-  //Temp password checker
+
+  const { loading, error, signup } = useSignUpWithEmailAndPassword()
+
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+
+  //     //Email validation checker
+  //     const emailRegex = /\S+@\S+\.\S+/;
+  //     if(!emailRegex.test(registrationData.email)){
+  //       setEmailErrorMessage(!emailErrorMessage)
+  //       alert("Please enter a valid email")
+  //       return
+  //     }
+
+  //     // Password validation checker
+  //     const pwdRegex =/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+  //     if(registrationData.passwordHash !== tempPass) {
+  //       setPassErrorMessage(!passErrorMessage)
+  //       alert("Password did not match")
+  //       return
+  //     } else if (!pwdRegex.test(registrationData.passwordHash)){
+  //       alert("Please enter a valid password")
+  //     }
 
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-      //Email validation checker
-      const emailRegex = /\S+@\S+\.\S+/;
-      if(!emailRegex.test(registrationData.email)){
-        setEmailErrorMessage(!emailErrorMessage)
-        alert("Please enter a valid email")
-        return
-      }
+  //   try {
+  //     axios.defaults.withCredentials = true;
 
-      // Password validation checker
-      const pwdRegex =/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-      if(registrationData.passwordHash !== tempPass) {
-        setPassErrorMessage(!passErrorMessage)
-        alert("Password did not match")
-        return
-      } else if (!pwdRegex.test(registrationData.passwordHash)){
-        alert("Please enter a valid password")
-      }
+  //     const submitData = {
+  //       ...registrationData,
+  //       birthDate: new Date(registrationData.birthDate).toISOString()
+  //     }
 
+  //     const response = await axios.post(`${LOCALDB_URL}user`, submitData)
+  //     console.log("Success: ", response.data);
 
-
-    try {
-      axios.defaults.withCredentials = true;
-
-      const submitData = {
-        ...registrationData,
-        birthDate: new Date(registrationData.birthDate).toISOString()
-      }
-
-      const response = await axios.post(`${LOCALDB_URL}user`, submitData)
-      console.log("Success: ", response.data);
-
-      console.log('Submitted Data: ', submitData)
-    } catch (err:any) {
-      if(axios.isAxiosError(err))
-      console.error('Axios error data: ',err.message);
-    }
-  }
+  //     console.log('Submitted Data: ', submitData)
+  //   } catch (err:any) {
+  //     if(axios.isAxiosError(err))
+  //     console.error('Axios error data: ',err.message);
+  //   }
+  // }
 
   //ChangeInput for creating a user
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -161,7 +165,7 @@ const Register = () => {
         {!type ? <div className='flex justify-around mt-6'>
           <button className=' px-7 py-4 rounded-[25px] text-[#424242] shadow-whiteShadow active:shadow-hoverWhiteShadow' value="User" onClick={(e: React.MouseEvent<HTMLButtonElement>) => setType((e.target as HTMLButtonElement).value)}>User</button>
           <button className=' px-7 py-4 rounded-[25px] text-[#424242] shadow-whiteShadow active:shadow-hoverWhiteShadow' value="Driver" onClick={(e: React.MouseEvent<HTMLButtonElement>) => setType((e.target as HTMLButtonElement).value)} >Driver</button>
-          </div> : <form onSubmit={handleSubmit}>
+          </div> : <div>
         <h2 className='text-2xl py-10'> Register </h2>
         <div className=''>
           <div className='mb-2'>
@@ -183,11 +187,11 @@ const Register = () => {
           </div>
           <div className='mb-2'>
             <h3 className='mb-2 font-semibold'>Password</h3>
-            <input type="password" name='passwordHash' value={registrationData.passwordHash} onChange={handleInputChange}  className=' border p-3 w-full rounded-xl' />
+            <input type="password" name='password' value={registrationData.password} onChange={handleInputChange}  className=' border p-3 w-full rounded-xl' />
           </div> 
           <div className='mb-2'>
             <h3 className='mb-2 font-semibold'>Confirm password</h3>
-            <input type="password" name='passwordHash' value={tempPass} onChange={(e)=>setTempPass(e.target.value)}   className=' border p-3 w-full rounded-xl' />
+            <input type="password" name='password' value={tempPass} onChange={(e)=>setTempPass(e.target.value)}   className=' border p-3 w-full rounded-xl' />
           {passErrorMessage ? <h3 className=' text-red-500 text-sm'>*Password did not match</h3> : null}
           </div>
 
@@ -269,10 +273,11 @@ const Register = () => {
             </div> : null}
             <div className='flex justify-center my-8 space-x-4'>
               <Link to="/homepage " className='flex items-center'> Back</Link>
-              <button type='submit' className=' px-7 py-4 rounded-[25px] text-[#424242] shadow-whiteShadow active:shadow-hoverWhiteShadow'>Register</button>
+              <button onClick={() => signup(registrationData)} className=' px-7 py-4 rounded-[25px] text-[#424242] shadow-whiteShadow active:shadow-hoverWhiteShadow'>Register</button>
+              {/* <Button w={"full"} colorScheme='blue' size={"sm"} onClick={() => signup(registrationData)}></Button> */}
             </div>
           </div>
-        </form>}
+          </div>}
       </div>
       </div>
     </>

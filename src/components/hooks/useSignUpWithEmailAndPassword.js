@@ -6,33 +6,33 @@ const useSignUpWithEmailAndPassword = () => {
     const [createUserWithEmailAndPassword, loading, error] =
         useCreateUserWithEmailAndPassword(auth);
 
-    const signup = async (inputs) => {
+    const signup = async (regitrationData) => {
         if (
-            !inputs.email ||
-            !inputs.password ||
-            !inputs.username ||
-            !inputs.firstName ||
-            !inputs.lastName
+            !regitrationData.email ||
+            !regitrationData.password ||
+            !regitrationData.firstName ||
+            !regitrationData.lastName
         ) {
             console.log("Please fill all the fields");
             return;
         }
         try {
             const newUser = await createUserWithEmailAndPassword(
-                inputs.email,
-                inputs.password
+                regitrationData.email,
+                regitrationData.password
             );
             if (!newUser && error) {
                 console.log(error);
                 return;
             }
             if (newUser) {
+                console.log(newUser);
+                console.log("creating account");
                 const userDoc = {
                     uid: newUser.user.uid,
-                    email: inputs.email,
-                    username: inputs.username,
-                    firstName: inputs.firstName,
-                    lastName: inputs.lastName,
+                    email: regitrationData.email,
+                    firstName: regitrationData.firstName,
+                    lastName: regitrationData.lastName,
                     bio: "",
                     profilePicURL: "",
                     followers: [],
@@ -40,12 +40,11 @@ const useSignUpWithEmailAndPassword = () => {
                     posts: [],
                     createdAt: Date.now(),
                 };
-                await setDoc(
-                    doc(firestore, "users", newUser.user.uid),
-                    userDoc
-                );
+                await setDoc(doc(firestore, "user", newUser.user.uid), userDoc);
                 localStorage.setItem("user-info", JSON.stringify(userDoc));
+                // loginUser(userDoc);
             }
+            console.log("account has been created");
         } catch (err) {
             console.error(err);
         }

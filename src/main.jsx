@@ -6,6 +6,9 @@ import {
 } from "react-router-dom";
 import './index.css'
 import { ChakraProvider } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react';
+import {mode} from "@chakra-ui/theme-tools"
+
 
 //ErrorPage
 // import ErrorPage from "./error-page"
