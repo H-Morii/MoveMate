@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client';
 import {
+  Navigate,
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
@@ -17,22 +18,35 @@ import WelcomeContent from './components/WelcomeContent/WelcomeContent.jsx';
 import Profile from './components/Profile/Profile.js';
 import Register from './routes/Register.tsx';
 
+//firebase
+import useAuthStore from './store/authStore'
+
+//Chakra
+import { ChakraProvider } from '@chakra-ui/react'
+
+
+
+const App = () => {
+  const authUser = useAuthStore(state => state.user);
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
+      authUser ? 
     <PageLayout>
       <WelcomeContent/>
-    </PageLayout>
+    </PageLayout> : <Navigate to='/homepage'/>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
   {
     path: "/homepage",
     element: (
+      !authUser ?
       <PageLayout>
       <Homepage />
-      </PageLayout>
+      </PageLayout> : <Navigate to="/"/>
 
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
@@ -40,14 +54,17 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-    <Login />
+    !authUser ?
+    <Login /> : <Navigate to='/'/>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
   {
     path: "/register",
     element: (
-    <Register />
+      <ChakraProvider>
+        <Register/>
+      </ChakraProvider>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
@@ -61,11 +78,15 @@ const router = createBrowserRouter([
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
 ]);
+return (
+  <RouterProvider router={router} />
+);
+}
 
-
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+// Rendering the App component
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
-  </React.StrictMode>,
-)
+    <App />
+  </React.StrictMode>
+);
