@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client';
 import {
+  Navigate,
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
@@ -8,7 +9,7 @@ import './index.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react';
 import {mode} from "@chakra-ui/theme-tools"
-
+import useAuthStore from './store/authStore'
 
 //ErrorPage
 // import ErrorPage from "./error-page"
@@ -21,39 +22,28 @@ import WelcomeContent from './components/WelcomeContent/WelcomeContent.js';
 import Profile from './components/Profile/Profile.js';
 import Register from './routes/Register.tsx';
 
-const styles = {
-	global: (props) => ({
-		body: {
-			bg: mode("gray.100", "#000")(props),
-			color: mode("gray.800", "whiteAlpha.900")(props),
-		},
-	}),
-};
-
-const config = {
-	initialColorMode: "dark",
-	useSystemColorMode: false,
-};
-
 // 3. extend the theme
 const theme = extendTheme({ config, styles });
+const authUser = useAuthStore(state => state.user)
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
+      authUser ? 
     <PageLayout>
       <WelcomeContent/>
-    </PageLayout>
+    </PageLayout> : <Navigate to='/homepage'/>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
   {
     path: "/homepage",
     element: (
+      !authUser ?
       <PageLayout>
       <Homepage />
-      </PageLayout>
+      </PageLayout> : <Navigate to="/"/>
 
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
@@ -61,14 +51,17 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-    <Login />
+    !authUser ?
+    <Login /> : <Navigate to='/'/>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
   {
     path: "/register",
     element: (
-    <Register />
+      <ChakraProvider>
+        <Register/>
+      </ChakraProvider>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
@@ -87,7 +80,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
+    <ChakraProvider>
       <RouterProvider router={router}/>
     </ChakraProvider>
   </React.StrictMode>,

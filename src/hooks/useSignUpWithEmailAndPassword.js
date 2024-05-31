@@ -1,10 +1,22 @@
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth, firestore } from "../../firebase/firebase";
+import {
+    useAuthState,
+    useCreateUserWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { auth, firestore } from "../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import useShowToast from "./useShowToast";
+import { Navigate } from "react-router-dom";
 
 const useSignUpWithEmailAndPassword = () => {
     const [createUserWithEmailAndPassword, loading, error] =
         useCreateUserWithEmailAndPassword(auth);
+
+    // //warning popup
+    const showToast = useShowToast();
+    //login user
+    // const logoutUser = useAuthState((state) => state.logout);
+    const navigate = useNavigate();
 
     const signup = async (regitrationData) => {
         if (
@@ -13,7 +25,7 @@ const useSignUpWithEmailAndPassword = () => {
             !regitrationData.firstName ||
             !regitrationData.lastName
         ) {
-            console.log("Please fill all the fields");
+            showToast("Error", "Please fill all the fields", "error");
             return;
         }
         try {
@@ -22,13 +34,11 @@ const useSignUpWithEmailAndPassword = () => {
                 regitrationData.password
             );
             if (!newUser && error) {
-                console.log(error);
+                showToast("Error", error.message, "error");
+
                 return;
             }
             if (newUser) {
-                console.log("newUser: ", newUser);
-                console.log("registrationData: ", regitrationData);
-                console.log("creating account");
                 const userDoc = {
                     uid: newUser.user.uid,
                     email: regitrationData.email,
@@ -41,18 +51,20 @@ const useSignUpWithEmailAndPassword = () => {
                     posts: [],
                     createdAt: Date.now(),
                 };
-                console.log("passed UserDoc");
                 await setDoc(
                     doc(firestore, "users", newUser.user.uid),
                     userDoc
                 );
                 localStorage.setItem("user-info", JSON.stringify(userDoc));
-
-                // loginUser(userDoc);
+                showToast(
+                    "Success",
+                    `User ${firstName} ${lastName} has been created successfully.`,
+                    "success"
+                );
+                navigate("/login");
             }
-            console.log("account has been created");
         } catch (err) {
-            console.error(err);
+            showToast("Error", err.message, "error");
         }
     };
 

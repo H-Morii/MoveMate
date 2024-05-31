@@ -2,10 +2,9 @@ import React, {useState, useEffect} from 'react'
 import Select from "react-select";
 import { Link } from 'react-router-dom';
 // import axios from'axios'
-//chakra
-import { Alert, AlertIcon, Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 
-import useSignUpWithEmailAndPassword from '../components/hooks/useSignUpWithEmailAndPassword';
+import useSignUpWithEmailAndPassword from '../hooks/useSignUpWithEmailAndPassword';
+import { Button } from '@chakra-ui/react';
 
 interface OptionType {
   value: string;
@@ -169,7 +168,7 @@ const Register = () => {
         <h2 className='text-2xl py-10'> Register </h2>
         <div className=''>
           <div className='mb-2'>
-            <h3 className='mb-2 font-semibold'>First Name</h3>
+            <h3 className='mb-2 font-semibold '>First Name</h3>
             <input type="text" name='firstName' value={registrationData.firstName} onChange={handleInputChange} className=' border p-3 w-full rounded-xl' />
           </div>
           <div className='mb-2'>
@@ -194,7 +193,6 @@ const Register = () => {
             <input type="password" name='password' value={tempPass} onChange={(e)=>setTempPass(e.target.value)}   className=' border p-3 w-full rounded-xl' />
           {passErrorMessage ? <h3 className=' text-red-500 text-sm'>*Password did not match</h3> : null}
           </div>
-
           <div className='mb-2'>
             <h3 className='mb-2 font-semibold'>Phone number</h3>
             <input type="text" name='phoneNumber' maxLength={11} value={registrationData.phoneNumber} onChange={handleInputChange}  className=' border p-3 w-full rounded-xl' />
@@ -272,9 +270,9 @@ const Register = () => {
             </div>
             </div> : null}
             <div className='flex justify-center my-8 space-x-4'>
+            <Button w={"100px"} h={'50px'} colorScheme='blue' size={"sm"} onClick={() => signup(registrationData)}>Register</Button>
               <Link to="/homepage " className='flex items-center'> Back</Link>
-              <button onClick={() => signup(registrationData)} className=' px-7 py-4 rounded-[25px] text-[#424242] shadow-whiteShadow active:shadow-hoverWhiteShadow'>Register</button>
-              {/* <Button w={"full"} colorScheme='blue' size={"sm"} onClick={() => signup(registrationData)}></Button> */}
+              {/* <button onClick={() => signup(registrationData)} className=' px-7 py-4 rounded-[25px] text-[#424242] shadow-whiteShadow active:shadow-hoverWhiteShadow'>Register</button> */}
             </div>
           </div>
           </div>}

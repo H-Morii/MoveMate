@@ -4,6 +4,7 @@ import {
   Navigate,
   createBrowserRouter,
   RouterProvider,
+  BrowserRouter,
 } from "react-router-dom";
 import './index.css'
 
@@ -62,9 +63,7 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: (
-      <ChakraProvider>
         <Register/>
-      </ChakraProvider>
     ),
     errorElement: <div className=' font-light text-red-500'><h1>404 Not Found</h1></div>
   },
@@ -84,9 +83,10 @@ return (
 }
 
 // Rendering the App component
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-root.render(
+const root = ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+        <ChakraProvider>
+            <App />
+        </ChakraProvider>
   </React.StrictMode>
 );

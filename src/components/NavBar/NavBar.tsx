@@ -9,12 +9,13 @@ import { BsChat } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import useLogout from "../../hooks/useLogout";
 
 const NavBar:React.FC = () => {
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  const { handleLogout } = useLogout()
 
   useEffect(() => {
 
@@ -56,7 +57,7 @@ const NavBar:React.FC = () => {
             <Link to="user" className=' hover:underline'>Profile</Link>
             </div>
             <div className='md:flex space-x-4'>
-              <Link to='/homepage' className='hover:underline'>Logout</Link>
+              <button onClick={handleLogout} className='hover:underline'>Logout</button>
             </div>
           </nav>
           </header>
